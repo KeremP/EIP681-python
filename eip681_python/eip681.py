@@ -1,6 +1,6 @@
 from multiprocessing.sharedctypes import Value
-from typing import Union, Optional
-from constants import _netname_to_id
+from typing import Union, Optional, Dict
+from .constants import _netname_to_id
 from web3 import Web3
 
 class EIP681:
@@ -24,9 +24,9 @@ class EIP681:
         payment: bool = False,
         amount: Optional[float] = None, 
         function: Optional[str] = None, 
-        params: Optional[dict[str,str]] = None) -> str:
+        params: Optional[Dict[str,str]] = None) -> str:
 
-        if Web3.is_address(target) == False:
+        if Web3.isAddress(target) == False:
             raise TypeError("target must be valid eth address")
 
         # target_address = Web3.toChecksumAddress(target)
