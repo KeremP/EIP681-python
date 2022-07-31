@@ -18,6 +18,7 @@ class EIP681:
         Builds EIP681 transaction url.
     """
     def __init__(self, chain: Optional[Union[str, int]] = None):
+        self.chain = 1
         if chain is not None:
             if type(chain) is str:
                 if chain not in _netname_to_id.keys():
@@ -25,15 +26,12 @@ class EIP681:
                 self.chain = _netname_to_id[str]
             elif type(chain) is int:
                 self.chain = chain
-        else:
-            # Default to ETH mainnet
-            self.chain = 1
 
     def build_tx_url(
         self,
         target: str, 
         payment: bool = False,
-        amount: Optional[float] = None, 
+        amount: Optional[Union[int, float]] = None, 
         decimals: int = 18,
         function: Optional[str] = None, 
         params: Optional[Dict[str,str]] = None) -> str:
@@ -66,6 +64,7 @@ class EIP681:
         ------
         TypeError
             If target address is not valid ETH address.
+            
         """
 
         if Web3.isAddress(target) == False:
@@ -98,4 +97,3 @@ class EIP681:
         url = f'{prefix}{target}@{self.chain}?value={value}'
     
         return url
-
