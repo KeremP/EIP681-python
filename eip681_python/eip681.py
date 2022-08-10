@@ -88,7 +88,7 @@ class EIP681:
         
         if function is not None:
             param_string = ''
-            for i, (k,v) in enumerate(params):
+            for i, (k,v) in enumerate(params.items()):
                 param_string+=k+'='+v
 
             url = f'ethereum:{target}@{self.chain}/{function}?{param_string}'
